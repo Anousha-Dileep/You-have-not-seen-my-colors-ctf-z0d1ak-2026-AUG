@@ -30,7 +30,7 @@ image.png
 
 The supplied image appeared to contain random RGB noise:
 
-![Challenge noisy image](<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/1ab7766d-ba46-4c4d-b581-d4cef72f8db1" />)
+![Challenge noisy image](image.png)
 
 The image was a 100 × 100 RGB PNG and appeared to contain random colored noise.
 
