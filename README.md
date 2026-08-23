@@ -6,7 +6,7 @@ Author: TitanCode
 
 # **Challenge Description:**
 
-Elian gave you this challenge. Find meaning in the noise, then prove what you decided to the private endpoint.
+Elian gave you this challenge. Find meaning in the noise, then prove what you decoded to the private endpoint.
 
 The answer is lowercase with words joined by underscores.
 
@@ -16,45 +16,30 @@ The answer is lowercase with words joined by underscores.
 | File | Description |
 |------|-------------|
 | crypto_you-have-not-seen-my-colors (1).tar | the attached file was the main clue/ciphertext |
-| an instance | where you have to submit the phrase and get the flag |
+| an instance | Provided an instance-specific image and an endpoint where the decoded phrase could be submitted |
 
 # **Analysis** 
 
 The description indicates that the phrase will be in lower case.
 
-when opened the file:
+After extracting the supplied archive, I found:
 
-it contained:
+(text)
+image.png
 
-image.png, a 100 × 100 pixel RGB image that visually looked mostly like random/noisy colors.
+The image was a 100 × 100 RGB PNG and appeared to contain random colored noise.
 
-used that image.png as the main input for solving the challenge. analyzed its pixel/color information—especially the Red, Green, 
+At first glance, there was no readable text or obvious visual clue.
 
-and Blue (RGB) channels and their underlying bits—because the challenge hint “You Have Not Seen My Colors” pointed toward
+Because the challenge was called "You Have Not Seen My Colors", I suspected that the important information was not the visible image 
 
-information being hidden in the image's color data.
+itself, but the underlying RGB color values.
 
-After that, The instance had a image to download 
-
-here, I assumed that by decoding the phrase in image and by submitting that phrase there we get the flag automatically.
-
-# Image:
-
-<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/101d8b34-71ed-41a8-90ed-24bc83845b8e" />
-
-It was an noisy image
-
-# Solution:
-
-just had to decode the image to get phrase
-
-as it was an noisy so it was not easy, researched some and got to know that:
-
-A normal RGB image stores every pixel as three numbers:
+An RGB pixel contains three values:
 
 Pixel = (Red, Green, Blue)
 
-Each of those numbers is 8 bits:
+Each channel is represented using 8 bits:
 
 R = r7 r6 r5 r4 r3 r2 r1 r0
 
@@ -62,31 +47,83 @@ G = g7 g6 g5 g4 g3 g2 g1 g0
 
 B = b7 b6 b5 b4 b3 b2 b1 b0
 
-Then again researched some and got this finding:
+This means that an RGB image can be separated into:
 
-The image looked like random colors because I was looking at the complete RGB values. But instead of treating each pixel as a color,
-separated the channels and examined their individual binary bit layers.
+Red channel
 
-<img width="750" height="450" alt="image" src="https://github.com/user-attachments/assets/aebf0eca-7bf4-43d0-a9ca-8326969e4641" />
+Green channel
 
-Think of an image as having hidden layers:
+Blue channel
 
-Normal image
+and each channel can then be separated further into eight individual bit planes.
 
-→ R / G / B channels
+Instead of viewing the image normally, I treated the RGB values as binary data.
 
-→ each channel split into bit 0, bit 1, ... bit 7
+# **Conceptually:**
 
-→ inspect/combine those layers
+Normal RGB image
+        ↓
+Separate R / G / B channels
+        ↓
+Convert channel values to binary
+        ↓
+Inspect individual bit planes
+        ↓
+Look for structured information hidden in the apparent noise
 
-→ a structured visual pattern appears
+This technique is known as bit-plane analysis and is commonly used in image steganography challenges.
 
-→ ZDK MASTER OF CTF
+Changing or arranging individual low-level bits of a pixel may have very little effect on how the image looks normally, while still 
 
-→ normalize as master_of_ctf
+allowing information to be hidden inside it.
 
-got the phrase "master_of_ctf" then submitted that phrase in the instance by which we got the flag in front.
+# **Challenge Instance**
+
+The challenge instance also provided an image.
+
+The supplied challenge image helped indicate that the solution involved analyzing image colors and their underlying binary representation.
+
+The instance image was then analyzed using the same RGB/bit-plane approach.
+
+After separating and inspecting the relevant bit information, a readable message became visible:
+
+ZDK MASTER OF CTF
+
+The challenge description stated that the answer must be:
+
+lowercase
+words joined with underscores
+
+##**Therefore:**
+
+ZDK MASTER OF CTF
+
+became:
+
+master_of_ctf
+
+ By submitting the Answer
+ 
+I submitted:
+
+master_of_ctf
+
+to the private endpoint provided by the challenge instance.
+
+The server accepted the phrase and returned the flag.
 
 # 🚩 **Flag:**
 
 zdk{MA5teR_OF_coLOR5_anD_C7F}
+
+#**Concepts Used:**
+
+RGB image representation
+
+Image steganography
+
+Bit-plane analysis
+
+Binary representation of image pixels
+
+Hidden information inside color channels
