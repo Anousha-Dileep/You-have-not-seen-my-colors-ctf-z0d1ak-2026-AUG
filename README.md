@@ -36,9 +36,9 @@ The image was a 100 × 100 RGB PNG and appeared to contain random colored noise.
 
 At first glance, there was no readable text or obvious visual clue.
 
-Because the challenge was called "You Have Not Seen My Colors", I suspected that the important information was not the visible image 
+Because the challenge was called "You Have Not Seen My Colors", I suspected that the important information was not the visible 
 
-itself, but the underlying RGB color values.
+image itself, but the underlying RGB color values.
 
 An RGB pixel contains three values:
 
@@ -67,12 +67,16 @@ Instead of viewing the image normally, I treated the RGB values as binary data.
 # **Conceptually:**
 
 Normal RGB image
+
         ↓
 Separate R / G / B channels
+        
         ↓
 Convert channel values to binary
+     
         ↓
 Inspect individual bit planes
+        
         ↓
 Look for structured information hidden in the apparent noise
 
