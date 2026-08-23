@@ -15,7 +15,7 @@ The answer is lowercase with words joined by underscores.
 # **Files**
 | File | Description |
 |------|-------------|
-| crypto_you-have-not-seen-my-colors (1).tar | the attached file was the main clue/ciphertext |
+| crypto_you-have-not-seen-my-colors (1).tar.gz | the attached file was the main clue/ciphertext |
 | an instance | Provided an instance-specific image and an endpoint where the decoded phrase could be submitted |
 
 # **Analysis** 
@@ -24,8 +24,13 @@ The description indicates that the phrase will be in lower case.
 
 After extracting the supplied archive, I found:
 
-(text)
 image.png
+
+### Supplied Image
+
+The supplied image appeared to contain random RGB noise:
+
+![Challenge noisy image](images/image.png)
 
 The image was a 100 × 100 RGB PNG and appeared to contain random colored noise.
 
@@ -94,7 +99,7 @@ The challenge description stated that the answer must be:
 lowercase
 words joined with underscores
 
-##**Therefore:**
+## **Therefore:**
 
 ZDK MASTER OF CTF
 
@@ -116,7 +121,7 @@ The server accepted the phrase and returned the flag.
 
 zdk{MA5teR_OF_coLOR5_anD_C7F}
 
-#**Concepts Used:**
+# **Concepts Used:**
 
 RGB image representation
 
